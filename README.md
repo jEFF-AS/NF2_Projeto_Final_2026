@@ -1,11 +1,10 @@
 # NeoBank - Atividade Avaliativa NF2
 
-Disciplina: Sistemas de Informação
-Avaliação: 2ª Avaliação - Ciclo 2
+Curso : Sistemas de Informação
+Avaliação: Checagem IV
 Tema: NF2 - Fidelização de Usuário na Aplicação
 Professor: Me. Luis Vinicius Costa Silva
-Turma: Noturno 2º Ciclo – 2º Semestre 2025
-Valor da Atividade: 40 pontos
+Turma: Noturno – 1º Semestre 2026
 
 ---
 
@@ -75,24 +74,16 @@ Dica: Comece pelas melhorias mais simples. Não é necessário fazer todas, apen
 
 Crie um arquivo chamado `RELATORIO.md` na raiz do projeto e responda as seguintes perguntas:
 
-a) Qual a diferença entre UI e UX? Como as melhorias que você fez impactam cada um deles? (4,0 pts)
+a) Qual a diferença entre UI e UX? Como as melhorias que você fez impactam cada um deles? 
 
-b) Explique como o feedback ao usuário e a sensação de segurança ajudam na fidelização de clientes em um app financeiro. (4,0 pts)
+b) Explique como o feedback ao usuário e a sensação de segurança ajudam na fidelização de clientes em um app financeiro.
 
-c) Por que é importante testar as mudanças com usuários antes de publicar o app? (3,0 pts)
+c) Por que é importante testar as mudanças com usuários antes de publicar o app? 
 
-d) Escolha uma das melhorias que você implementou e explique como ela melhora a experiência e a confiança do usuário. (4,0 pts)
+d) Escolha uma das melhorias que você implementou e explique como ela melhora a experiência e a confiança do usuário. 
 
 ---
 
-## Critérios de Avaliação
-
-| Critério                        | Pontos |
-| ------------------------------- | ------ |
-| Implementação das 4 melhorias   | 20     |
-| Código organizado e funcionando | 5      |
-| Relatório teórico (qualidade)   | 15     |
-| Total                           | 40     |
 
 ---
 
