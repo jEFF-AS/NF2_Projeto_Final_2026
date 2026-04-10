@@ -26,8 +26,9 @@ class _TransferPageState extends State<TransferPage> {
   final _recipientController = TextEditingController();
   final _amountController = TextEditingController();
 
-  // TODO: Crie uma função que preenche o campo de valor quando o aluno clicar em um valor sugerido
-  // Exemplo: void _addQuickAmount(double value) { ... }
+  void _addQuickAmount(double value) { 
+    _amountController.text = value.toStringAsFixed(2);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,13 +52,15 @@ class _TransferPageState extends State<TransferPage> {
             const SizedBox(height: 25),
             const Text("Valores sugeridos:", style: TextStyle(fontWeight: FontWeight.w500)),
             const SizedBox(height: 10),
-                        ElevatedButton(
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Transferência simulada")),
-                );
-              },
-              child: const Text("BRL 100"),
+            
+            Wrap(
+              spacing: 10,
+              children: [
+                ElevatedButton(onPressed: () => _addQuickAmount(50.00), child: const Text("R\$ 50")),
+                ElevatedButton(onPressed: () => _addQuickAmount(100.00), child: const Text("R\$ 100")),
+                ElevatedButton(onPressed: () => _addQuickAmount(200.00), child: const Text("R\$ 200")),
+                ElevatedButton(onPressed: () => _addQuickAmount(500.00), child: const Text("R\$ 500")),
+              ],
             ),
 
             const Spacer(),
