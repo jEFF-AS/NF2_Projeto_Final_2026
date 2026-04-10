@@ -31,8 +31,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // TODO: Crie uma variável booleana para controlar se o saldo deve ser mostrado ou escondido
-  // Exemplo: bool _showBalance = true;
+  bool _showBalance = true;
 
   final double balance = 12487.65;
 
@@ -61,15 +60,20 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text("Saldo disponível", style: TextStyle(fontSize: 16, color: Colors.white70)),
-                        // TODO: Adicione aqui um IconButton com ícone de olho
-                        // que ao ser clicado altera o valor de _showBalance
+                        IconButton(
+                          icon: Icon(_showBalance ? Icons.visibility : Icons.visibility_off, color: Colors.white),
+                          onPressed: () {
+                            setState(() {
+                              _showBalance = !_showBalance;
+                            });
+                          }
+                        )
                       ],
                     ),
                     const SizedBox(height: 8),
-                    // TODO: Mostre o saldo formatado se _showBalance for true,
-                    // caso contrário mostre "••••••"
+
                     Text(
-                      "R\$ ${balance.toStringAsFixed(2)}",  // ← Modificar esta linha
+                      _showBalance ? "R\$ ${balance.toStringAsFixed(2)}" : "••••••", 
                       style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
                     ),
                   ],
