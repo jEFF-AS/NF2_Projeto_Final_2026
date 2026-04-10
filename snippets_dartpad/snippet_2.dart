@@ -51,8 +51,14 @@ class _TransferPageState extends State<TransferPage> {
             const SizedBox(height: 25),
             const Text("Valores sugeridos:", style: TextStyle(fontWeight: FontWeight.w500)),
             const SizedBox(height: 10),
-            // TODO: Adicione aqui uma Row ou Wrap com botões para R$ 50, R$ 100, R$ 200 e R$ 500
-            // Cada botão deve chamar a função _addQuickAmount com o valor correspondente
+                        ElevatedButton(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Transferência simulada")),
+                );
+              },
+              child: const Text("BRL 100"),
+            ),
 
             const Spacer(),
             ElevatedButton(
