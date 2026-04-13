@@ -14,7 +14,7 @@ class NeoBankApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData.dark().copyWith(colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF00D4AA))),
+        theme: ThemeData.dark().copyWith(colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF00D4AA), brightness: Brightness.dark,)),
         home: const HomePage(),
       );
 }
@@ -26,7 +26,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // TODO 1: Crie variável bool _showBalance = true;
+  bool _showBalance = true;
 
   final double balance = 12487.65;
 
@@ -55,12 +55,19 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text("Saldo disponível", style: TextStyle(fontSize: 16, color: Colors.white70)),
-                        // TODO 2: Adicione IconButton aqui para alternar _showBalance
+                        IconButton(
+                          icon: Icon(_showBalance ? Icons.visibility : Icons.visibility_off, color: Colors.white),
+                          onPressed: () {
+                            setState(() {
+                              _showBalance = !_showBalance;
+                            });
+                          },
+                        ),
                       ],
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      "R\$ ${balance.toStringAsFixed(2)}", // TODO 3: Condicionar com _showBalance
+                      _showBalance ? "R\$ ${balance.toStringAsFixed(2)}" : "••••••", 
                       style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
                     ),
                   ],
@@ -89,9 +96,45 @@ class _TransferPageState extends State<TransferPage> {
   final _recipientController = TextEditingController();
   final _amountController = TextEditingController();
 
-  // TODO 4: Crie função _addQuickAmount(double value)
+  void _addQuickAmount(double value) {
+    _amountController.text = value.toStringAsFixed(2);
+  }
 
-  // TODO 5: Crie função _confirmTransfer() com AlertDialog de PIN e SnackBar de sucesso
+  void _confirmTransfer() {
+    if (_recipientController.text.isEmpty || _amountController.text.isEmpty) return;
+
+    final pinController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Digite o PIN (1234)"),
+        content: TextField(
+          controller: pinController,
+          keyboardType: TextInputType.number,
+          obscureText: true,
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+
+              if (pinController.text == "1234") {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Transferência realizada com sucesso!", style: TextStyle(color: Colors.green))),
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("PIN incorreto!", style: TextStyle(color: Colors.red))),
+                );
+              }
+            },
+            child: const Text("Confirmar"),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,11 +150,19 @@ class _TransferPageState extends State<TransferPage> {
             TextField(controller: _amountController, keyboardType: TextInputType.number, decoration: const InputDecoration(labelText: "Valor")),
             const SizedBox(height: 20),
             const Text("Valores sugeridos:"),
-            // TODO 6: Adicione botões de valores sugeridos aqui
+            Wrap(
+              spacing: 10,
+              children: [
+                ElevatedButton(onPressed: () => _addQuickAmount(50.00), child: const Text("R\$ 50")),
+                ElevatedButton(onPressed: () => _addQuickAmount(100.00), child: const Text("R\$ 100")),
+                ElevatedButton(onPressed: () => _addQuickAmount(200.00), child: const Text("R\$ 200")),
+                ElevatedButton(onPressed: () => _addQuickAmount(500.00), child: const Text("R\$ 500")),
+              ],
+            ),
             const Spacer(),
             ElevatedButton(
               onPressed: () {
-                // TODO 7: Chamar _confirmTransfer()
+                _confirmTransfer();
               },
               child: const Text("Confirmar Transferência"),
             ),
